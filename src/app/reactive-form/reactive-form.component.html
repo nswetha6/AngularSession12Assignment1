@@ -1,0 +1,101 @@
+
+<div class="container col-sm-offset-3 col-sm-6">
+
+  <form [formGroup]="rform" (ngSubmit)="addFormValues(rform.value)" >
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <b Style='font-size:20px'>Session 12 - Routing Assignment</b>
+      </div>
+    </div>
+
+    <!-- <div class="form-group">
+      <label for="firstname">First Name</label>
+      <input type="text" class="form-control" id="firstname"
+       [formControl]="FirstName">
+    </div>
+    <div class="form-group">
+      <label for="middlename">Middle Name</label>
+      <input type="text" class="form-control" id="middlename" 
+      [formControl]="MiddleName">
+    </div> -->
+
+    <div class="form-group">
+      <label for="firstname">First Name</label>
+      <input type="text" class="form-control" id="firstname" placeholder="Enter First Name"
+       formControlName='FirstName'>
+       <div *ngIf="rform.controls['FirstName'].errors && (rform.controls['FirstName'].dirty || rform.controls['FirstName'].touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="rform.controls['FirstName'].hasError('required')">
+                                    First name is required.
+                                </div>
+                                <div *ngIf="rform.controls['FirstName'].hasError('minlength')">
+                                    Please enter atleast 4 characeters.
+                                </div>
+                            </div>
+                                
+       <!-- <div *ngIf= rform.controls['FirstName']></div> -->
+    </div>
+    <div class="form-group">
+      <label for="middlename">Middle Name</label>
+      <input type="text" class="form-control" id="middlename" placeholder="Enter Middle Name"
+      formControlName="MiddleName" >
+      </div>
+    <div class="form-group">
+      <label for="lastname">Last Name</label>
+      <input type="text" class="form-control" id="lastname" placeholder="Enter Last Name"
+      formControlName="LastName">
+        <div *ngIf="rform.controls['LastName'].errors && (rform.controls['LastName'].dirty || rform.controls['LastName'].touched)"
+              class="alert alert-danger">
+            <div *ngIf="rform.controls['LastName'].hasError('required')">
+              Last name is required
+            </div>
+            <div *ngIf ="rform.controls['LastName'].hasError('minlength')">
+              Minimum length 3 characters
+            </div>
+            </div>
+
+    </div>
+    <div class="form-group">
+      <label for ="department">Department </label>
+      <select id="department" class="form-control" placeholder="Choose Department"
+      formControlName="Department">
+        <option *ngFor="let d of DropDownList" [ngValue]="d.course">
+            {{d.course}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group row">
+    <div class="col-md-5 col-sm-5">
+      <label for="date"> Date of Joining</label>
+        <input type="date" id="date" class="form-control" placeholder="Enter DOJ"
+        formControlName="Date">
+        </div>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary" [disabled]="!rform.valid">Submit</button>
+      <button type="reset" class="btn btn-primary" (click)="resetForm()">Reset</button>
+    </div>
+
+    <div>{{rform.value |json}}</div>
+    <br>
+   
+     </form>  
+     
+<!--  
+<div>{{FirstName}}</div> <!--  getting first name from .ts file.. retuning first name -->
+<!-- <div>{{rform.controls.FirstName.valid}}</div>
+<div>{{rform.controls.FirstName.status}}</div>
+    -->
+ 
+    <div *ngIf="FinalStdntList.length >0; else elseBlock">
+      <app-student-list-comp [slist] = "FinalStdntList"></app-student-list-comp>
+    </div>
+    <ng-template #elseBlock>
+      <b>No Students added</b>
+    </ng-template>
+    <!-- Removed code of table display from here -->
+</div> 
+
+    
+ 
+  

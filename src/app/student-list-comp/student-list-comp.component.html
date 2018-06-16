@@ -1,0 +1,44 @@
+
+<div class="container  col-sm-6">
+<div>
+    <div>
+        <label for ="searchname"> Search for Name</label>
+        <input type="text" id="searchname" class="form-control" placeholder="Search for student"
+         [(ngModel)]="term"> 
+      </div>
+      <br>
+  <table class="table table-bordered table-hover table-responsive">
+    <thead class="panel panel-primary">
+  <tr class="panel-heading">
+    <td>FirstName</td>
+    <td> Middle Name</td>
+    <td> Last Name</td>
+    <td> Department</td>
+    <td> Date Of Joining (D/M/Y) </td>
+    <td> Remove Student</td>
+  </tr>
+</thead>
+<ng-container *ngIf="slist.length >0; else elseBlock">
+  <tr *ngFor="let s of slist | nameSearch: term">
+    <!-- <td>{{s.FirstName | titlecase }}</td> -->
+    <td>
+      <!-- <a [routerLink]="['/StudentsList',s.FirstName]"> -->
+        {{s.FirstName | capitalfirst }}
+      
+    </td>
+    <td>{{s.MiddleName}}</td>
+    <td>{{s.LastName}}</td>
+    <td>{{s.Department}}</td>
+    <td>{{s.Date | date:'d/M/yyyy'}}</td>
+     <td><button (click)='remove(s.id)'>Remove</button> </td> 
+  </tr>
+</ng-container>
+ 
+</table>
+<ng-template #elseBlock>
+  No Students added
+</ng-template>
+<div appTestDirect [color]="'blue'" (change1)="onUse($event)" >Swetha</div>
+<h3>{{val}}</h3>
+</div>
+</div>
